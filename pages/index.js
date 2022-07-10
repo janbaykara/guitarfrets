@@ -14,14 +14,18 @@ function formatHarmonicNote(note) {
 export default function Home() {
   const [root, setRoot] = useState("C");
   const [chord, setChord] = useState("M");
-  const rootAndChord = useMemo(() => root + " " + chord, [root, chord]);
+  const rootAndChord = useMemo(() => chord ? root + " " + chord : root, [root, chord]);
   const chordNotes = useMemo(() => {
-    try {
-      return harmonics.chord(rootAndChord).map(formatHarmonicNote);
-    } catch (e) {
-      return [];
+    if (chord) {
+      try {
+        return harmonics.chord(rootAndChord).map(formatHarmonicNote);
+      } catch (e) {
+        return [];
+      }
+    } else {
+      return [root];
     }
-  }, [rootAndChord]);
+  }, [rootAndChord, root, chord]);
 
   // TODO: Animate root going up
 
@@ -114,7 +118,7 @@ export default function Home() {
           <div className="grid grid-cols-6 font-mono gap-2">
             {harmonics.chords().map((_chord) => (
               <div
-                onClick={() => setChord(_chord)}
+                onClick={() => setChord(c => c === _chord ? null : _chord)}
                 className={_chord === chord && "text-red-500 font-bold"}
               >
                 {_chord}
