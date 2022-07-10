@@ -152,7 +152,7 @@ function String({ start, highlighted = [], fretCount = 16, onClick }) {
             style={{
               background: isHighlighted
                 ? "white"
-                : d3.interpolateRainbow(nI / fretCount)
+                : d3.interpolateRainbow(nI / NOTES.length)
             }}
           >
             {NOTES[nI]}
