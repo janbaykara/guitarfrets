@@ -16,13 +16,13 @@ export default function Home() {
   const [chord, setChord] = useState("M");
   // const [cycle, setCycle] = useState(false);
   const rootAndChord = useMemo(() => root + " " + chord, [root, chord]);
-  const scale = useMemo(() => {
-    try {
-      harmonics.scale(rootAndChord);
-    } catch (e) {
-      return [];
-    }
-  }, [rootAndChord]);
+  // const scale = useMemo(() => {
+  //   try {
+  //     harmonics.scale(rootAndChord);
+  //   } catch (e) {
+  //     return [];
+  //   }
+  // }, [rootAndChord]);
   const chordNotes = useMemo(() => {
     try {
       return harmonics.chord(rootAndChord).map(formatHarmonicNote);
@@ -117,7 +117,11 @@ export default function Home() {
                 onClick={() => setRoot(note)}
                 key={i}
                 className={`cursor-pointer py-1 px-3 ${
-                  root === note && "text-red-500"
+                  root === note
+                    ? "text-red-500 font-bold"
+                    : chordNotes.includes(note)
+                    ? "text-orange-500"
+                    : null
                 }`}
               >
                 {note}
@@ -133,7 +137,7 @@ export default function Home() {
             {harmonics.chords().map((_chord) => (
               <div
                 onClick={() => setChord(_chord)}
-                className={_chord === chord && "text-red-500"}
+                className={_chord === chord && "text-red-500 font-bold"}
               >
                 {_chord}
               </div>
