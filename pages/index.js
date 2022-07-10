@@ -14,15 +14,7 @@ function formatHarmonicNote(note) {
 export default function Home() {
   const [root, setRoot] = useState("C");
   const [chord, setChord] = useState("M");
-  // const [cycle, setCycle] = useState(false);
   const rootAndChord = useMemo(() => root + " " + chord, [root, chord]);
-  // const scale = useMemo(() => {
-  //   try {
-  //     harmonics.scale(rootAndChord);
-  //   } catch (e) {
-  //     return [];
-  //   }
-  // }, [rootAndChord]);
   const chordNotes = useMemo(() => {
     try {
       return harmonics.chord(rootAndChord).map(formatHarmonicNote);
@@ -54,14 +46,6 @@ export default function Home() {
             ))}
           </div>
         </div>
-        {/* <div className="flex flex-row">
-          Scale:&nbsp;
-          <div className="ml-2 flex flex-row space-x-3 font-mono font-bold">
-            {scale.map((s) => (
-              <span>s</span>
-            ))}
-          </div>
-        </div> */}
 
         <div className="border-b-4 border-black my-2" />
         <p className="italic font-bold mb-2">Options on the fretboard</p>
@@ -101,12 +85,6 @@ export default function Home() {
         </main>
 
         <aside className="pt-4">
-          {/* <div>
-            <button onClick={() => setCycle((cycle) => !cycle)}>
-              {cycle ? "⏸" : "▶️"} cycle
-            </button>
-          </div> */}
-
           <div className="border-b-4 border-black my-2" />
 
           <p className="italic font-bold mb-2">Select a root note</p>
