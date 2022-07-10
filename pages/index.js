@@ -142,7 +142,7 @@ function String({ start, highlighted = [], fretCount = 16, onClick }) {
           <div
             onClick={() => onClick(NOTES[nI])}
             key={i}
-            className={`cursor-pointer py-1 px-3 ${
+            className={`cursor-pointer py-1 px-3 first:border-r-4 border-black ${
               isHighlighted ? "font-bold underline" : ""
             }`}
             style={{
